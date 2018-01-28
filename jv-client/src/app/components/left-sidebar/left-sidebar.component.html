@@ -1,0 +1,16 @@
+<div class="ui basic segment">
+  <img src="assets/logo.png" alt="title" class="ui centered tiny image">
+  <!-- <span class="ui center text">VR资源库</span> -->
+  <div class="ui horizontal divider">VR资源库</div>
+
+  <div class="ui teal three item secondary pointing  menu">
+    <!-- <a class="active item">模型</a>
+    <a class="item">材质</a>
+    <a class="item">贴图</a> -->
+
+    <a *ngFor="let tab of tabCategories" class="item" [class.active]="tab.actived" (click)="onClickTabMenu(tab)">{{tab.title}}</a>
+  </div>
+
+  <app-accordion-menu [categories]="categories"></app-accordion-menu>
+
+</div>

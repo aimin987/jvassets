@@ -1,0 +1,30 @@
+<div class="ui top fixed stackable  menu">
+
+  <!-- <div class="heard item">
+    <img src="assets/logo.png" [alt]="title" class="logo">
+    <span>{{title}}</span>
+  </div> -->
+
+  <a class="item" (click)="onClick()" ><i class="outdent icon"></i></a>
+
+  <a *ngFor="let item of items" class="item" [class.active]="item.isActived" (click)="onClickMenuItem(item)">
+    <i *ngIf="item.icon" class="{{item.icon}} icon"></i>
+    {{item.title}}
+  </a>
+
+  <div class="item">
+    <div class="ui transparent icon input">
+      <input type="text" placeholder="请输入搜索关键词......">
+      <i class="search link icon"></i>
+    </div>
+  </div>
+  <div class="right menu">
+    <!-- <div class="ui buttons">
+      <button class="ui green button"><i class="unlock icon"></i> 登录</button>
+      <div class="or"></div>
+      <button class="ui red button"><i class="write icon"></i>注册</button>
+    </div> -->
+    <a class="ui item"><i class="unlock icon"></i>登录</a>
+    <a class="ui item"><i class="write icon"></i> 注册</a>
+  </div>
+</div>
