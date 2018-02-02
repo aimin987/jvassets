@@ -1,0 +1,16 @@
+.ui.left.vertical.sidebar {
+    border-right: 1px solid #ececec;
+    box-shadow: none;
+    background-color:white;
+}
+
+.pusher {
+    padding-top: 42px;
+    padding-right: 260px;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+
+.pusher .main-content {
+    min-height: 100vh;
+}

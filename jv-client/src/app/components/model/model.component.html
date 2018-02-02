@@ -1,0 +1,11 @@
+<!-- <div class="ui segment" id="product-grid">
+  <div class="left ui rail">
+    <div class="ui sticky" style="width: 272px !important; height: 262.513px !important; left: 18.5px">
+      <h3 class="ui header">Stuck Content</h3>
+    </div>
+  </div>
+
+  <app-product></app-product>
+</div> -->
+
+<app-product *ngFor="let item of items" [title]="title" [displayNum]='diplayNum'></app-product>

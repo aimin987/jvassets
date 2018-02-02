@@ -1,10 +1,10 @@
 <div class="ui styled accordion">
   <div *ngFor="let category of categories">
-    <div class="title" [class.active]="category.actived">
+    <div class="title" (click)="onClickTitle(category)" [routerLink]="['/models', {id: category.path}]"  routerLinkActive="active">
       <i class="dropdown icon"></i>{{category.title}}</div>
-    <div class="content" [class.active]="category.actived">
+    <div class="content" routerLinkActive="active">
       <div class="ui teal secondary pointing vertical menu">
-        <a *ngFor="let childCategory of category.children" class="item" [class.active]="childCategory.actived" (click)="onClickItem(childCategory)" ><div class="ui teal label">{{childCategory.badge}}</div>{{childCategory.title}} </a>
+        <a *ngFor="let childCategory of category.children" class="item" [class.active]="childCategory === activedCategory" (click)="onClickItem(childCategory)" ><div class="ui teal label">{{childCategory.badge}}</div>{{childCategory.title}} </a>
       </div>
     </div>
   </div>

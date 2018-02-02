@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Category, CategoryService } from '../../services/category.service';
+import { Router } from '@angular/router';
+import { MenuItem } from '../../services/navbar.service';
 
 
 @Component({
@@ -7,33 +9,24 @@ import { Category, CategoryService } from '../../services/category.service';
   templateUrl: './left-sidebar.component.html',
   styleUrls: ['./left-sidebar.component.css']
 })
-export class LeftSidebarComponent implements OnInit {
-
-  tabCategories: Category[];
+export class LeftSidebarComponent implements OnInit, OnChanges {
   categories: Category[];
-  activeTab: Category;
-  constructor(private categoryService: CategoryService) { }
+  constructor(
+    private router: Router,
+    private categoryService: CategoryService
+  ) { }
+
+  @Input()
+  currentMenuItem: MenuItem;
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.categories = this.categoryService.getCategories(this.currentMenuItem.id);
+  }
 
   ngOnInit() {
-    this.categories = this.categoryService.getModelCategories();
-    this.tabCategories = this.categoryService.getTabCategories();
-
-    this.activeTab = this.tabCategories[0];
-    this.activeTab.actived = true;
+    // this.categories = this.categoryService.getCategories(this.currentMenuItem.id);
   }
 
   onClickTabMenu(tab) {
-    if (tab === this.activeTab) {
-      return;
-    }
-    this.activeTab.actived = false;
-    tab.actived = true;
-    this.activeTab = tab;
-
-    if (tab.id === 1) {
-      this.categories = this.categoryService.getModelCategories();
-    } else if ( tab.id === 2) {
-      this.categories = this.categoryService.getMaterialCategories();
-    }
   }
 }

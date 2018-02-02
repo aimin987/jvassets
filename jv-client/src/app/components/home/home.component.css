@@ -1,0 +1,25 @@
+.circle {
+    height: 100px;
+    width: 100px;
+    background: #9da;
+    border-radius: 50px;
+
+    -webkit-transition-property: width;
+    transition-property: width;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+}
+
+.circle:hover {
+    width: 200px;
+    height: 200px;
+}
+
+.box_shadow {
+    width: 100px;
+    height: 100px;
+    box-shadow: 2px 2px 10px #333;
+}
+

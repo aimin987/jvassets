@@ -1,4 +1,6 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Category } from '../../services/category.service';
 
 declare var $: any;
@@ -14,48 +16,33 @@ export class AccordionMenuComponent implements OnInit, OnChanges {
 
   activedCategory: Category;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
     // console.log(changes);
-    if (this.activedCategory) {
-      this.activedCategory.actived = false;
-      this.activedCategory = null;
-    }
-
-    if (this.categories.length > 0) {
-      if (this.categories[0].children.length > 0) {
-        this.activedCategory = this.categories[0].children[0];
-        this.activedCategory.actived = true;
-        this.categories[0].actived = true;
-      }
-    }
   }
 
   ngOnInit() {
     $('.ui.accordion').accordion({
-      'behavior': {
-        exclusive: false
-      }
+      'exclusive': true,
+      'collapsible': false
     });
   }
+
+  onClickTitle(category) {
+    this.activedCategory = null;
+    this.router.navigate(['/models/' + category.path]);
+  }
+
   onClickItem(event) {
     if (event === this.activedCategory) {
       return;
     }
-    this.activedCategory.actived = false;
-    event.actived = true;
     this.activedCategory = event;
+
+    this.router.navigate(['/' + event.path]);
   }
 }
-
-
-
-// export class SecondCategory {
-//   constructor(
-//     public id: number,
-//     public title: string,
-//     public path: string) {
-//   }
-// }

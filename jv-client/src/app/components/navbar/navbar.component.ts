@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-declare var $: any;
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { MenuItem, NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,39 +9,35 @@ declare var $: any;
 })
 export class NavbarComponent implements OnInit {
 
-  items = [
-    new MenuItem('home', '首页', true, 'home'),
-    // new MenuItem('assets', '资源库', false, 'database'),
-    new MenuItem('helper', '帮助', false, 'help circle')
-  ];
+  leftItems: MenuItem[];
+  rightItems: MenuItem[];
+  selectedItem: MenuItem;
 
-  constructor() { }
-  logoUrl = 'assets/logo.png';
-  title = 'VR资源库';
+  constructor(
+    private router: Router,
+    private navbarService: NavbarService
+  ) { }
 
+  // tslint:disable-next-line:no-output-rename
+  @Output('CurrentMenuItem')
+  changeNavMenuItem: EventEmitter<MenuItem> = new EventEmitter();
 
   ngOnInit() {
-    // $('.ui.menu a.item').on('click', function() {
-    //   $(this).addClass('active').siblings().removeClass('active');
-    // });
+    this.leftItems = this.navbarService.getLeftMenu();
+    this.rightItems = this.navbarService.getRightMenu();
+
+    this.selectedItem = this.leftItems[0];
+    this.changeNavMenuItem.emit(this.selectedItem);
   }
 
-  onClickMenuItem(event) {
-    this.items.forEach((val, idx, array) => {
-      val.isActived = false;
-      event.isActived = true;
-    });
+  onClickMenuItem(item: MenuItem) {
+    // if (item === this.selectedItem) {
+    //   return;
+    // }
+    this.selectedItem = item;
+    this.router.navigate(['/' + this.selectedItem.path]);
+
+    this.changeNavMenuItem.emit(this.selectedItem);
   }
 }
 
-// 菜单
-export class MenuItem {
-  constructor(
-    public path: string,
-    public title: string,
-    public isActived: boolean,
-    public icon: string = null
-  ) {
-  }
-
-}

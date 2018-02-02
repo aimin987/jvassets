@@ -24,8 +24,8 @@
 .ui.styled.accordion,
 .ui.styled.accordion .accordion {
   border-radius: 0px;
-  background: #FFFFFF;
-  box-shadow: 0px 0px 0px 0 rgba(34, 36, 38, 0.15), 0px 0px 0px 0px rgba(34, 36, 38, 0.15);
+  background:none;
+  box-shadow: none;
 }
 
 .ui.styled.accordion .title,
